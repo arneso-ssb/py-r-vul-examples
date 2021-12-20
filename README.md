@@ -31,16 +31,25 @@ docker scan --file Dockerfile vul-py-test --exclude-base
 Docker scan does not detect issues in the PyPi or R-containers.
 
 ### Trivy
-Trivy is an open source vulnerability scanner:
-https://github.com/aquasecurity/trivy
+[Trivy](https://github.com/aquasecurity/trivy) is an open source vulnerability
+scanner.
+
 ```
 trivy --exit-code 1 --light --ignore-unfixed --severity HIGH,CRITICAL vul-py-test
 ```
 
-Trivy detects issues:
+Trivy detects issues in Python-container:
 | LIBRARY | VULNERABILITY ID | SEVERITY | INSTALLED VERSION | FIXED VERSION |
 |---------|------------------|----------|-------------------|---------------|
 | Pillow  | CVE-2021-23437   | HIGH     | 8.3.1             | 8.3.2         |
 
+Trivy does not detect errors in R-container
 
+### oysteR
+[oysteR](https://github.com/sonatype-nexus-community/oysteR) is an R-package
+that scans for security vulnerabilities in installed R-packes.
 
+It detects errors in the R-container. Run this command to do a scan:
+```
+docker run vul-r-test /bin/sh -c 'Rscript scan.R'
+```

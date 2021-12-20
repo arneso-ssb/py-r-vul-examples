@@ -1,0 +1,7 @@
+# This script scans the installed R-packges for security issues.
+# It requires that the oyestR-package is installed:
+# https://github.com/sonatype-nexus-community/oysteR
+
+library("oysteR")
+audit = audit_installed_r_pkgs()
+get_vulnerabilities(audit)

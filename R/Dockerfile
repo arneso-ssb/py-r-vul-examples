@@ -9,3 +9,8 @@ RUN R -e "install.packages(c('oysteR', 'devtools'), dependencies=TRUE)"
 # Install package with vulnerability
 # https://ossindex.sonatype.org/component/pkg:cran/widgetframe
 RUN R -e "require(devtools); install_version('widgetframe', version = '0.3.0')"
+
+# Script that scans for security vulnerabilities in installed packages
+# Run with:
+# docker run vul-r-test /bin/sh -c 'Rscript scan.R'
+COPY scan.R .
